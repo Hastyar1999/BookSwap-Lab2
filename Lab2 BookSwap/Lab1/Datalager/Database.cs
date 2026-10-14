@@ -175,15 +175,11 @@ namespace Lab1.Datalager
             foreach (string rad in File.ReadAllLines(kontoFil, Encoding.UTF8))
             {
                 string[] delar = rad.Split(';');
-        
-                Administratörer.Add(new Administratör(
-                    delar[0],
-                    delar[1],
-                    delar[2],
-                    delar[3],
-                    delar[4],
-                    null
-                ));
+
+                Konto konto =  new Konto(delar[3], delar[5]);
+                Administratör admin = new Administratör(delar[0], delar[1], delar[2],
+                    delar[3], delar[4], konto);
+                Administratörer.Add(admin);
             }
         }
 
