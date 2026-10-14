@@ -1,15 +1,12 @@
-﻿using Lab1.Affarslager;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Lab1.Affarslager;
+using Lab1.Datalager;
 
 namespace Lab1.Presentation
 {
     class Meny
     {
-        // Menyn använder affärslagret och har ingen egen databas.
         private readonly Controller controller;
-        private StudentInfo inloggadStudent;
+        private Student inloggadStudent;
 
         public Meny(Controller controller)
         {
@@ -18,10 +15,8 @@ namespace Lab1.Presentation
 
         public void Menu()
         {
-
             bool körs = true;
 
-            // while-loopen gör att huvudmenyn fortsätter visas tills användaren väljer 0.
             while (körs)
             {
                 MenyVarianter();
@@ -31,64 +26,57 @@ namespace Lab1.Presentation
                 {
                     return;
                 }
-                int val;
-                // TryParse kontrollerar att användaren faktiskt har skrivit ett heltal.
-                if (int.TryParse(menyval, out val))
-                {
 
-                    // Vi visar olika menyval beroende på om studenten är inloggad.
-                    if (inloggadStudent == null)
+                int val;
+                if (!int.TryParse(menyval, out val))
+                {
+                    Console.WriteLine("Ange ett giltigt nummer.");
+                }
+                else if (inloggadStudent == null)
+                {
+                    // Menyn före inloggning.
+                    switch (val)
                     {
-                        switch (val)
-                        {
-                            case 0:
-                                Console.WriteLine("PROGRAMMET AVSLUTAS...");
-                                körs = false;
-                                break;
-                            case 1:
-                                LoggaIn();
-                                break;
-                            case 2:
-                                RegistreraStudent();
-                                break;
-                            default:
-                                Console.WriteLine("Vänligen ange ett giltigt alternativ för att fortsätta!");
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        switch (val)
-                        {
-                            case 0:
-                                Console.WriteLine("PROGRAMMET AVSLUTAS...");
-                                körs = false;
-                                break;
-                            case 1:
-                                Console.WriteLine("TILL SALU ANNONSER:");
-                                VisaTillSaluAnnonser();
-                                break;
-                            case 2:
-                                ReserveraAnnons();
-                                break;
-                            case 3:
-                                LoggaUt();
-                                break;
-                            default:
-                                Console.WriteLine("Vänligen ange ett giltigt alternativ för att fortsätta!");
-                                break;
-                        }
+                        case 0:
+                            körs = false;
+                            break;
+                        case 1:
+                            LoggaIn();
+                            break;
+                        case 2:
+                            RegistreraStudent();
+                            break;
+                        default:
+                            Console.WriteLine("Välj ett giltigt alternativ.");
+                            break;
                     }
                 }
-
                 else
                 {
-                    Console.WriteLine("Vänligen ange ett giltigt alternativ för att fortsätta! ");
+                    // Menyn efter inloggning.
+                    switch (val)
+                    {
+                        case 0:
+                            körs = false;
+                            break;
+                        case 1:
+                            VisaTillSaluAnnonser();
+                            break;
+                        case 2:
+                            ReserveraAnnons();
+                            break;
+                        case 3:
+                            LoggaUt();
+                            break;
+                        default:
+                            Console.WriteLine("Välj ett giltigt alternativ.");
+                            break;
+                    }
                 }
 
                 if (körs)
                 {
-                    Console.WriteLine("Tryck på valfri tangent för att återgå till huvudmenyn.");
+                    Console.WriteLine("Tryck på en tangent för att gå tillbaka.");
                     if (Console.IsInputRedirected)
                     {
                         Console.ReadLine();
@@ -98,13 +86,9 @@ namespace Lab1.Presentation
                         Console.ReadKey(true);
                     }
                 }
-
             }
-
         }
 
-
-        // Skriver ut valen som finns i huvudmenyn.
         private void MenyVarianter()
         {
             if (!Console.IsOutputRedirected)
@@ -114,6 +98,7 @@ namespace Lab1.Presentation
 
             Console.WriteLine("VÄLKOMMEN TILL BOOKSWAP");
             Console.WriteLine();
+
             if (inloggadStudent == null)
             {
                 Console.WriteLine("1. Logga in");
@@ -126,36 +111,34 @@ namespace Lab1.Presentation
                 Console.WriteLine("2. Reservera annons");
                 Console.WriteLine("3. Logga ut");
             }
+
             Console.WriteLine("0. Avsluta");
             Console.WriteLine();
         }
 
-
-        // Hämtar annonser genom controllern och visar bara de som fortfarande är till salu.
-        // Menyn behöver alltså inte själv veta hur filtreringen i databasen fungerar.
+        // Visar riktiga Annons-objekt som Controller har hämtat.
         private void VisaTillSaluAnnonser()
         {
+            List<Annons> annonser = controller.HämtaTillSaluAnnonser();
+            Console.WriteLine("TILL SALU ANNONSER:");
 
-            // Affärslagret skickar läsbara annonsuppgifter till menyn.
-            List<AnnonsInfo> tillSaluLista = controller.HämtaTillSaluAnnonser();
-
-
-            // Går igenom listan och skriver ut en annons i taget.
-            foreach (AnnonsInfo a in tillSaluLista)
+            if (annonser.Count == 0)
             {
-                Console.WriteLine(
-                    $"AnnonsID: {a.GetAnnonsId()} | " +
-                    $"{a.GetTypAvBok()}, | " +
-                    $"{a.GetTitel()}, | " +
-                    $"Pris: {a.GetPrisuppgift()} kr, | " +
-                    $"Status: {a.GetStatus()}, | " +
-                    $"Skick: {a.GetSkick()} | " +
-                    $"Säljare: {a.GetSäljare().GetFörnamn()} {a.GetSäljare().GetEfternamn()}"
-                );
+                Console.WriteLine("Det finns inga annonser till salu.");
             }
-            
+
+            foreach (Annons annons in annonser)
+            {
+                Console.WriteLine("AnnonsID: " + annons.GetAnnonsId() + " | " +
+                    annons.GetTypAvBok() + " | " + annons.GetTitel() + " | " +
+                    "Pris: " + annons.GetPrisuppgift() + " kr | " +
+                    "Status: " + annons.GetStatus() + " | " +
+                    "Skick: " + annons.GetSkick() + " | " +
+                    "Säljare: " + annons.GetSäljare().GetFörnamn() + " " +
+                    annons.GetSäljare().GetEfternamn());
+            }
         }
-        // Inmatningen sker i presentationslagret. Controller skapar och lagrar objekten.
+
         private void RegistreraStudent()
         {
             Console.WriteLine("REGISTRERA NY STUDENT");
@@ -177,7 +160,6 @@ namespace Lab1.Presentation
             Console.WriteLine(resultat);
         }
 
-        // Inloggningen söker efter e-post och kontrollerar lösenordet.
         private void LoggaIn()
         {
             Console.Write("E-post: ");
@@ -185,7 +167,7 @@ namespace Lab1.Presentation
             Console.Write("Lösenord: ");
             string lösenord = Console.ReadLine();
 
-            StudentInfo student = controller.LoggaIn(epost, lösenord);
+            Student student = controller.LoggaIn(epost, lösenord);
             if (student == null)
             {
                 Console.WriteLine("Fel e-postadress eller lösenord.");
@@ -202,29 +184,29 @@ namespace Lab1.Presentation
             Console.WriteLine("Du är nu utloggad.");
         }
 
-        // Här startar hela flödet för att reservera en annons.
-        // Studenten slås upp via controllern. Affärslagret kontrollerar reservationen.
         public void ReserveraAnnons()
         {
-
-            // Studenten som loggat in används automatiskt vid reservationen.
             if (inloggadStudent == null)
             {
                 Console.WriteLine("Du måste logga in först.");
                 return;
             }
-            string StudentID = inloggadStudent.GetAnvändarId();
 
             VisaTillSaluAnnonser();
+            Console.Write("Skriv AnnonsID på den annons du vill reservera: ");
+            string annonsId = Console.ReadLine();
 
-            Console.Write("Skriv AnnonsID på den annonsen du vill reservera: ");
-            string AnnonsID = Console.ReadLine();
-
-            // Affärslagret kontrollerar reglerna och genomför reservationen.
-            ReservationsResultat resultat = controller.ReserveraAnnons(AnnonsID, StudentID);
-            Console.WriteLine(resultat.Meddelande);
-
+            Annons annons = controller.ReserveraAnnons(annonsId,
+                inloggadStudent.GetAnvändarId());
+            if (annons == null)
+            {
+                Console.WriteLine("Det gick inte att reservera annonsen. " +
+                    "Kontrollera ID, status och att annonsen inte är din egen.");
+            }
+            else
+            {
+                Console.WriteLine("Annonsen " + annons.GetAnnonsId() + " är reserverad.");
+            }
         }
     }
-
 }
