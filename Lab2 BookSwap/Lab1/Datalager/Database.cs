@@ -17,7 +17,7 @@ namespace Lab1.Datalager
         private readonly List <Administratör> Administratörer = new List<Affär>();
 
         // Filen sparas bredvid programmets körbara filer.
-        private readonly string studentFil = Path.Combine(AppContext.BaseDirectory, "Konton.txt");
+        private readonly string kontoFil = Path.Combine(AppContext.BaseDirectory, "Konton.txt");
 
 
         
@@ -148,7 +148,7 @@ namespace Lab1.Datalager
                 return;
             }
 
-            foreach (string rad in File.ReadAllLines(studentFil, Encoding.UTF8))
+            foreach (string rad in File.ReadAllLines(kontoFil, Encoding.UTF8))
             {
                 string[] delar = rad.Split(';');
                 if (delar.Length != 6)
@@ -169,7 +169,27 @@ namespace Lab1.Datalager
             }
         }
 
-    
+        public void LäsInAdministratörer()
+        {
+            
+            foreach (string rad in File.ReadAllLines(kontoFil, Encoding.UTF8))
+            {
+                string[] delar = rad.Split(';');
+        
+                Administratörer.Add(new Administratör(
+                    delar[0],
+                    delar[1],
+                    delar[2],
+                    delar[3],
+                    delar[4],
+                    null
+                ));
+            }
+        }
+
+
+
+        
 
     }
 }
