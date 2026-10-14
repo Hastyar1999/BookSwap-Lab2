@@ -6,7 +6,8 @@
     <Nullable>disable</Nullable>
     <DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
   </PropertyGroup>
-  <ItemGroup>
+<ItemGroup>
     <ProjectReference Include="../Affarslager/Affarslager.csproj" />
+    <ProjectReference Include="../Datalager/Datalager.csproj" />
   </ItemGroup>
 </Project>
