@@ -14,7 +14,7 @@ namespace Lab1.Datalager
         private readonly List<Student> Studenter = new List<Student>();
         private readonly List<Annons> Annonser = new List<Annons>();
         private readonly List<Affär> Affärer = new List<Affär>();
-
+        private readonly Liat<Administratör> Administratörer = new List<Aministratör>(); 
         // Filen sparas bredvid programmets körbara filer.
         private readonly string studentFil = Path.Combine(AppContext.BaseDirectory, "Konton.txt");
 
