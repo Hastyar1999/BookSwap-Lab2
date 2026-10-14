@@ -1,1 +1,2 @@
 ﻿A005;Robert;Petre;Robert.Student@hb.se;0764259373;Robert
+AD001;Adam;Andersson;adam.admin@hb.se;0701234567
