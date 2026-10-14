@@ -14,9 +14,13 @@ namespace Lab1.Datalager
         private readonly List<Student> Studenter = new List<Student>();
         private readonly List<Annons> Annonser = new List<Annons>();
         private readonly List<Affär> Affärer = new List<Affär>();
-        private readonly Liat<Administratör> Administratörer = new List<Aministratör>(); 
+
         // Filen sparas bredvid programmets körbara filer.
         private readonly string studentFil = Path.Combine(AppContext.BaseDirectory, "Konton.txt");
+
+
+        
+        
 
         // Söker igenom annonserna efter ett specifikt annons-ID.
         // Om ingen match hittas returneras null, vilket betyder att ingen annons hittades.
@@ -35,11 +39,11 @@ namespace Lab1.Datalager
 
 
         // Samma princip som ovan, men här söker vi efter en student med rätt användar-ID.
-        public Student HämtaStudent(string studentId)
+        public Student HämtaStudent(string användarId)
         {
             foreach (Student student in Studenter)
             {
-                if (student.GetAnvändarId() == studentId)
+                if (student.GetAnvändarId() == användarId)
                 {
                     return student;
                 }
@@ -74,9 +78,9 @@ namespace Lab1.Datalager
         }
 
         // Kontrollerar ID så att samma student inte registreras två gånger.
-        public bool FinnsStudentId(string studentId)
+        public bool FinnsanvändarId(string användarId)
         {
-            return HämtaStudent(studentId) != null;
+            return HämtaStudent(användarId) != null;
         }
 
         // Skapar en ny lista som bara innehåller annonser med statusen "Till salu".
@@ -152,7 +156,7 @@ namespace Lab1.Datalager
                 }
 
                 // Lägg inte in samma student igen om ID eller e-post redan finns.
-                if (FinnsStudentId(delar[0]) || FinnsEpost(delar[3]))
+                if (FinnsanvändarId(delar[0]) || FinnsEpost(delar[3]))
                 {
                     continue;
                 }
