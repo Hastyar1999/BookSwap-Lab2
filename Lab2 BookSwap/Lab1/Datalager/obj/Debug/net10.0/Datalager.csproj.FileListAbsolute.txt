@@ -1,0 +1,12 @@
+C:\Users\rober\OneDrive\Desktop\Lab1\Datalager\bin\Debug\net10.0\Datalager.deps.json
+C:\Users\rober\OneDrive\Desktop\Lab1\Datalager\bin\Debug\net10.0\Datalager.dll
+C:\Users\rober\OneDrive\Desktop\Lab1\Datalager\bin\Debug\net10.0\Datalager.pdb
+C:\Users\rober\OneDrive\Desktop\Lab1\Datalager\obj\Debug\net10.0\Datalager.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rober\OneDrive\Desktop\Lab1\Datalager\obj\Debug\net10.0\Datalager.AssemblyInfoInputs.cache
+C:\Users\rober\OneDrive\Desktop\Lab1\Datalager\obj\Debug\net10.0\Datalager.AssemblyInfo.cs
+C:\Users\rober\OneDrive\Desktop\Lab1\Datalager\obj\Debug\net10.0\Datalager.csproj.CoreCompileInputs.cache
+C:\Users\rober\OneDrive\Desktop\Lab1\Datalager\obj\Debug\net10.0\Datalager.dll
+C:\Users\rober\OneDrive\Desktop\Lab1\Datalager\obj\Debug\net10.0\refint\Datalager.dll
+C:\Users\rober\OneDrive\Desktop\Lab1\Datalager\obj\Debug\net10.0\Datalager.pdb
+C:\Users\rober\OneDrive\Desktop\Lab1\Datalager\obj\Debug\net10.0\ref\Datalager.dll
+C:\Users\rober\OneDrive\Desktop\Lab1\Datalager\obj\Debug\net10.0\Datalager.csproj.Up2Date

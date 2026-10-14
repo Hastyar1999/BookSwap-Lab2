@@ -1,0 +1,15 @@
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\bin\Debug\net10.0\Affarslager.deps.json
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\bin\Debug\net10.0\Affarslager.dll
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\bin\Debug\net10.0\Affarslager.pdb
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\bin\Debug\net10.0\Datalager.dll
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\bin\Debug\net10.0\Datalager.pdb
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\obj\Debug\net10.0\Affarslager.csproj.AssemblyReference.cache
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\obj\Debug\net10.0\Affarslager.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\obj\Debug\net10.0\Affarslager.AssemblyInfoInputs.cache
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\obj\Debug\net10.0\Affarslager.AssemblyInfo.cs
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\obj\Debug\net10.0\Affarslager.csproj.CoreCompileInputs.cache
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\obj\Debug\net10.0\Affarsla.ED286814.Up2Date
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\obj\Debug\net10.0\Affarslager.dll
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\obj\Debug\net10.0\refint\Affarslager.dll
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\obj\Debug\net10.0\Affarslager.pdb
+C:\Users\rober\OneDrive\Desktop\Lab1\Affarslager\obj\Debug\net10.0\ref\Affarslager.dll
