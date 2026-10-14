@@ -13,8 +13,9 @@ namespace Lab1.Datalager
         // I den här laborationen använder vi listor som en enkel databas i minnet.
         // Det betyder att informationen finns kvar så länge programmet körs, men inte efter att det stängs.
         private readonly List<Student> Studenter = new List<Student>();
-        private readonly List<Annons> Annonser = new List<Annons>();
+        private static readonly List<Annons> Annonser = new List<Annons>();
         private readonly List<Affär> Affärer = new List<Affär>();
+        private readonly List<Administratör> Administratörer = new List<Administratör>();
 
         // Filen sparas bredvid programmets körbara filer.
         private readonly string studentFil = Path.Combine(AppContext.BaseDirectory, "Konton.txt");
@@ -258,6 +259,10 @@ namespace Lab1.Datalager
         }
 
 
+        public List<Annons> HämtaAllaAnnonser()
 
+        {
+            return Database.Annonser;
+        }
     }
 }
