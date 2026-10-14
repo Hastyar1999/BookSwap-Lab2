@@ -19,16 +19,16 @@ namespace Lab1.Affarslager
             return databas.HämtaTillSaluAnnonser();
         }
 
-        public Student HämtaStudent(string studentId)
+        public Student HämtaStudent(string användarId)
         {
-            return databas.HämtaStudent(studentId);
+            return databas.HämtaStudent(användarId);
         }
 
         // Skapar ett konto och en student. Konto sparas i Användare genom arv.
-        public string RegistreraStudent(string studentId, string förnamn, string efternamn,
+        public string RegistreraStudent(string användarId, string förnamn, string efternamn,
             string epost, string telefonnummer, string lösenord)
         {
-            studentId = studentId?.Trim() ?? "";
+            studentId = användarId?.Trim() ?? "";
             förnamn = förnamn?.Trim() ?? "";
             efternamn = efternamn?.Trim() ?? "";
             epost = epost?.Trim() ?? "";
@@ -47,7 +47,7 @@ namespace Lab1.Affarslager
             }
 
             // Vi skiljer uppgifterna med semikolon i Konton.txt.
-            string[] uppgifter = { studentId, förnamn, efternamn, epost, telefonnummer, lösenord };
+            string[] uppgifter = { användarId, förnamn, efternamn, epost, telefonnummer, lösenord };
             foreach (string uppgift in uppgifter)
             {
                 if (uppgift.Contains(';') || uppgift.Contains('\n') || uppgift.Contains('\r'))
@@ -56,7 +56,7 @@ namespace Lab1.Affarslager
                 }
             }
 
-            if (databas.FinnsStudentId(studentId))
+            if (databas.FinnsStudentId(användarId))
             {
                 return "Student-ID finns redan.";
             }
@@ -67,7 +67,7 @@ namespace Lab1.Affarslager
             }
 
             Konto konto = new Konto(epost, lösenord);
-            Student student = new Student(studentId, förnamn, efternamn,
+            Student student = new Student(användarId, förnamn, efternamn,
                 epost, telefonnummer, konto);
             try
             {
@@ -105,9 +105,9 @@ namespace Lab1.Affarslager
         }
 
         // Returnerar den reserverade annonsen, eller null om det inte går.
-        public Annons ReserveraAnnons(string annonsId, string studentId)
+        public Annons ReserveraAnnons(string annonsId, string användarId)
         {
-            Student köpare = databas.HämtaStudent(studentId);
+            Student köpare = databas.HämtaStudent(användarId);
             Annons annons = databas.HämtaAnnons(annonsId);
 
             if (köpare == null || annons == null)
