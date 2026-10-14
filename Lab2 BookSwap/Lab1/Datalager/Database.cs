@@ -10,100 +10,13 @@ namespace Lab1.Datalager
 {
     public class Database
     {
-        // I den här laborationen använder vi listor som en enkel databas i minnet.
-        // Det betyder att informationen finns kvar så länge programmet körs, men inte efter att det stängs.
+        
         private readonly List<Student> Studenter = new List<Student>();
-        private static readonly List<Annons> Annonser = new List<Annons>();
+        private readonly List<Annons> Annonser = new List<Annons>();
         private readonly List<Affär> Affärer = new List<Affär>();
-        private readonly List<Administratör> Administratörer = new List<Administratör>();
 
         // Filen sparas bredvid programmets körbara filer.
         private readonly string studentFil = Path.Combine(AppContext.BaseDirectory, "Konton.txt");
-
-
-        // Seed skapar testdata: först studenter och sedan annonser som kopplas till säljarna.
-        // Det gör att vi slipper mata in all data manuellt varje gång programmet startar.
-        public void Seed()
-        {
-            // Testdata ska bara skapas en gång.
-            if (Studenter.Count > 0 || Annonser.Count > 0)
-            {
-                return;
-            }
-
-            Student student1 = new Student(
-               användarId: "A001",
-               förnamn: "Robert",
-               efternamn: "Petre",
-               ePost: "robert@hb.se",
-               telefonnummer: "0701286786"
-            );
-            Student student2 = new Student(
-               användarId: "A002",
-               förnamn: "Hastyar",
-               efternamn: "Hastyarsefternamn",
-               ePost: "Hastyar@hb.se",
-               telefonnummer: "0701238765"
-            );
-            Student student3 = new Student(
-               användarId: "A003",
-               förnamn: "Jenny",
-               efternamn: "Vu",
-               ePost: "Jenny@hb.se",
-               telefonnummer: "0701290009"
-            );
-
-            // Studenterna läggs in i studentlistan så att de senare kan sökas fram via sitt ID.
-            Studenter.Add(student1);
-            Studenter.Add(student2);
-            Studenter.Add(student3);
-
-            Kursbok kursbok1 = new Kursbok(
-                annonsId: "ANN001",
-                typavbok: "Kursbok",
-                titel: "Databasteknik",
-                prisuppgift: 300,
-                publiceringsdatum: new DateTime(2026, 9, 20),
-                status: "Till salu",
-                skick: "Bra",
-                isbn: "123456789",
-                författare: "Anders Andersson",
-                upplaga: "6",
-                säljare: student1
-            );
-
-            Kompendium kompendium1 = new Kompendium(
-                annonsId: "ANN002",
-                typavbok: "Kompendium",
-                titel: "Programmering C#",
-                prisuppgift: 100,
-                publiceringsdatum: new DateTime(2026, 9, 21),
-                status: "Till salu",
-                skick: "Bra",
-                sidor: 120,
-                utgivningsår: 2025,
-                säljare: student2
-            );
-
-            DigitalResurs digitalResurs1 = new DigitalResurs(
-                annonsId: "ANN003",
-                typavbok: "Digital Resurs",
-                titel: "Python Material",
-                prisuppgift: 50,
-                publiceringsdatum: new DateTime(2026, 9, 22),
-                status: "Till salu",
-                skick: "Digital",
-                filformat: "PDF",
-                leveranssätt: "E-post",
-                säljare: student3
-            );
-
-            // De olika objekten kan ligga i samma lista eftersom Kursbok, Kompendium och DigitalResurs ärver från Annons.
-            Annonser.Add(kursbok1);
-            Annonser.Add(kompendium1);
-            Annonser.Add(digitalResurs1);
-
-        }
 
         // Söker igenom annonserna efter ett specifikt annons-ID.
         // Om ingen match hittas returneras null, vilket betyder att ingen annons hittades.
@@ -188,8 +101,7 @@ namespace Lab1.Datalager
             Affärer.Add(affär);
         }
 
-        // De här metoderna ändrar innehållet i våra listor, ungefär som enkla databasoperationer.
-        // Den här metoden lägger till en ny annons.
+       
         public void LäggTillAnnons(Annons annons)
         {
             Annonser.Add(annons);
@@ -252,17 +164,7 @@ namespace Lab1.Datalager
             }
         }
 
-        // Visar var textfilen har skapats om vi behöver hitta den.
-        public string HämtaStudentFil()
-        {
-            return studentFil;
-        }
+    
 
-
-        public List<Annons> HämtaAllaAnnonser()
-
-        {
-            return Database.Annonser;
-        }
     }
 }
